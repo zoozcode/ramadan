@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="style.css" rel="stylesheet">
+    <script
+  src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.11/dist/dotlottie-wc.js"
+  type="module"
+></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+  <!-- Video Background -->
+    <video autoplay muted loop id="bg-video">
+        <source src="vidio/slate.mp4" type="video/mp4">
+    </video>
+    
+    <div class="flex justify-center">
+        <dotlottie-wc
+  src="https://lottie.host/e9f0ba47-a92c-4338-8baa-87f4b072e78f/JioSAnBYII.lottie"
+  style="width: 230px;height: 230px"
+  autoplay
+  loop
+></dotlottie-wc>
+
+    </div>
+        <div class="jus">
+
+            <h2 class="text-bold text-6xl lg:text-8xl text-center text-yellow-300 text-shadow-lg">Ramadan Kareem</h2>
+            <h5 class="text-center text-sm lg:text-xl text-gray-200 mt-6 px-20">“Barang siapa berpuasa Ramadan karena iman dan mengharap pahala, maka diampuni dosa-dosanya yang telah lalu.
+            Barang siapa menegakkan (shalat malam) di bulan Ramadan karena iman dan mengharap pahala, maka diampuni dosa-dosanya yang telah lalu.
+            Dan barang siapa menegakkan (shalat) pada malam Lailatul Qadar karena iman dan mengharap pahala, maka diampuni dosa-dosanya yang telah lalu.”</h5>
+        </div>
+
+        <div class="flex justify-center gap-4 mt-10 mx-6 lg:mx-0">
+            <div class="bg-red-500 text-white rounded-lg w-24 h-24 
+                flex flex-col items-center justify-center shadow-lg" >
+                <span id="days" class="text-center font-bold text-2xl">0</span>
+                <span class="font-bold">HARI</span>
+            </div>
+            <div class="bg-red-500 text-white rounded-lg w-24 h-24 
+                flex flex-col items-center justify-center shadow-lg" >
+                <span id="hours" class="text-center font-bold text-2xl">0</span>
+                <span class="font-bold">JAM</span>
+            </div>
+            <div class="bg-red-500 text-white rounded-lg w-24 h-24 
+                flex flex-col items-center justify-center shadow-lg" >
+                <span id="minutes" class="text-center font-bold text-2xl">0</span>
+                <span class="font-bold">MENIT</span>
+            </div>
+            <div class="bg-red-500 text-white rounded-lg w-24 h-24 
+                flex flex-col items-center justify-center shadow-lg" >
+                <span id="seconds" class="text-center font-bold text-2xl">0</span>
+                <span class="font-bold">DETIK</span>
+            </div>
+
+        </div>
+
+    <div class="mx-2 lg:mx-10">
+
+        <div class="flex flex-wrap lg:flex-nowrap mt-30 gap-4">
+            <div class="rounded-4xl bg-slate-800 w-full px-4 mb-10 lg:w-1/2 border border-gray-400  h-auto shadow-2xl">
+                <h2 class="uppercase text-5xl font-bold mt-6 text-center text-amber-500 text-shadow-lg">dzikir digital</h2>
+                <h1 class="text-center text-9xl font-bold mt-4 lg:mt-12 text-white" id="dzikir">0</h1>
+                <button class="bg-amber-600 shadow-2xl text-4xl text-white w-16 h-16 rounded-full lg:mt-12 mt-4 mx-auto block" id="tambah">+</button>
+                <p class="text-center my-4 text-gray-200">ketuk untuk berdzikir</p>
+            </div>
+            
+            <div class="rounded-4xl bg-slate-800 w-full px-4 lg:w-1/2 border border-gray-400  h-auto mb-10 shadow-2xl">
+                <h2 class="uppercase text-5xl font-bold mt-6 text-center text-amber-500 text-shadow-lg">jadwal sholat</h2>
+                <div class="bg-green-500 p-3 flex justify-between my-3 rounded-2xl">
+                    <span class="text-white font-bold">Imsak</span>
+                    <span id="imsak" class="text-white font-bold"></span>
+                </div>
+                <div class="bg-green-500 p-3 flex justify-between my-3 rounded-2xl">
+                    <span class="text-white font-bold">Subuh</span>
+                    <span id="subuh" class="text-white font-bold"></span>
+                </div>
+                <div class="bg-green-500 p-3 flex justify-between my-3 rounded-2xl">
+                    <span class="text-white font-bold">Dzuhur</span>
+                    <span id="dzuhur" class="text-white font-bold"></span>
+                </div>
+                <div class="bg-green-500 p-3 flex justify-between my-3 rounded-2xl">
+                    <span class="text-white font-bold">Ashar</span>
+                    <span id="ashar" class="text-white font-bold"></span>
+                </div>
+                <div class="bg-green-500 p-3 flex justify-between my-3 rounded-2xl">
+                    <span class="text-white font-bold">Maghrib</span>
+                    <span id="maghrib" class="text-white font-bold"></span>
+                </div>
+                <div class="bg-green-500 p-3 flex justify-between my-3 mb-4 rounded-2xl">
+                    <span class="text-white font-bold">Isya'</span>
+                    <span id="isya" class="text-white font-bold"></span>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var daysEl = document.getElementById('days');
+    var hoursEl = document.getElementById('hours');
+    var minutesEl = document.getElementById('minutes');
+    var secondsEl = document.getElementById('seconds');
+
+    var ramadanDate = new Date('March 19, 2026 00:00:00').getTime();
+
+    function updateCountdown() {
+        var now = new Date().getTime();
+        var distance = ramadanDate - now;
+
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        daysEl.innerText = days;
+        hoursEl.innerText = hours;
+        minutesEl.innerText = minutes;
+        secondsEl.innerText = seconds;
+
+        if (distance < 0) {
+            clearInterval(countdownInterval);
+            daysEl.innerText = '0';
+            hoursEl.innerText = '0';
+            minutesEl.innerText = '0';
+            secondsEl.innerText = '0';
+        }
+    }
+
+    var countdownInterval = setInterval(updateCountdown, 1000);
+
+    var dzikirCount = 0;
+    var dzikirEl = document.getElementById('dzikir');
+    var tambahButton = document.getElementById('tambah'); 
+
+    tambahButton.addEventListener('click', function(){
+        dzikirCount++;
+        dzikirEl.innerText=dzikirCount;
+    });
+
+
+function getTodayDate() {
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const year = today.getFullYear();
+    return `${day}-${month}-${year}`;
+  }
+
+  const todayDate = getTodayDate();
+  fetch("https://api.aladhan.com/v1/timingsByCity/${todayDate}?city=Jepara&country=Indonesia&method=2")
+  .then(res => res.json())
+  .then(data => {
+    const j = data.data.timings;
+
+    document.getElementById("imsak").innerText = j.Imsak;
+    document.getElementById("subuh").innerText = j.Fajr;
+    document.getElementById("dzuhur").innerText = j.Dhuhr;
+    document.getElementById("ashar").innerText = j.Asr;
+    document.getElementById("maghrib").innerText = j.Maghrib;
+    document.getElementById("isya").innerText = j.Isha;
+  })
+  .catch(err => console.log(err));
+</script>
+</html>
