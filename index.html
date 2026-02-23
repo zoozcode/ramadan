@@ -11,9 +11,15 @@
   type="module"
 ></script>
 
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css"
+/>
+
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
+    
   <!-- Video Background -->
     <video autoplay muted loop id="bg-video">
         <source src="vidio/slate.mp4" type="video/mp4">
@@ -102,8 +108,19 @@
             </div>
         </div>
     </div>
+   <audio id="bg-audio" autoplay loop muted>
+  <source src="audio/maherzain.mp3" type="audio/mpeg">
+</audio>
+
+<p class="bg-amber-600 w-12 h-12 rounded-full ring-4 ring-amber-800 text-white hover:ring-4 hover:ring-red-500 aud" id="audio"><i class="fa-solid fa-music"></i></p>
 </body>
 <script>
+    var audio=document.getElementById("audio");
+    audio.addEventListener("click", () => {
+    const audio = document.getElementById("bg-audio");
+    audio.muted = false;
+    audio.play();
+  });
     var daysEl = document.getElementById('days');
     var hoursEl = document.getElementById('hours');
     var minutesEl = document.getElementById('minutes');
@@ -160,7 +177,7 @@ function getTodayDate() {
   }
 
   const todayDate = getTodayDate();
-  fetch("https://api.aladhan.com/v1/timingsByCity/${todayDate}?city=Jepara&country=Indonesia&method=2")
+  fetch(`https://api.aladhan.com/v1/timingsByCity/${todayDate}?city=Jepara&country=Indonesia&method=2`)
   .then(res => res.json())
   .then(data => {
     const j = data.data.timings;
